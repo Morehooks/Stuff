@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+        <title>D3 Page Template</title>
+        <script type="text/javascript" src="d3.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var dataset;
+		var w = 800; //w and h create the chart area.
+		var h = 400;
+		var m = 100;
+		var barPadding = 1; //space between bars.
+		
+		d3.json("Freq.json", function(error, json){ //json loader.
+			if(error){
+				console.log(error);
+			} else{
+				console.log(json);
+			}
+			dataset = json;
+			update(dataset) //runs function below. Takes json file as argument.
+		});
+		
+		function update(data){
+			
+			var yScale = d3.scale.ordinal()
+						.domain(d3.range(dataset.length))
+						.rangeRoundBands([0, h], 0.05)
+		
+			var xScale = d3.scale.linear() //does not work
+						.domain([0, 60]) //this needs fixing with array functions?
+						.range([0, w]);
+						
+			var svg = d3.select("body") //creates the area to make svgs inside
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h);
+			
+			svg.selectAll("rect") //these three lines create a svg (bar), and join it to the data.
+				.data(dataset)
+				.enter()
+				.append("rect") //applies svg to the page
+				.attr("y", function(d, i){
+					return yScale(i); //dynamic, function good for 2 - million data pints
+				}) 
+				.attr("x", function(d, i){
+					return  0; //no need for function but useful later?
+				})
+				.attr("height", yScale.rangeBand()) //dynamic, same a y postioning
+				.attr("width", function(d, i){
+					return xScale(d.Per); //width of the bar is data * 15
+				})
+				//.attr("fill", "teal"); simple colouring
+				.attr("fill", function(d){
+					return "rgb(0, 0, " + (d.Per * 10) + ")";
+				}); //complex colour, mixing up B in RGB
+			
+			svg.selectAll("text") //applies text of the data point dynamically
+			   .data(dataset)
+			   .enter()
+			   .append("text")
+			   .text(function(d) {
+			   		return d.Response + ": " + d.Per;
+			   })
+			   .attr("text-anchor", "middle")
+			   .attr("y", function(d, i) {
+			   		return yScale(i) + yScale.rangeBand() / 1.7; 
+			   })
+			  .attr("x", function(d) {
+			   		return d.Per * 5;
+			   })
+			   .attr("font-family", "sans-serif")
+			   .attr("font-size", "15px")
+			   .attr("fill", "white");
+				
+		};
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,14 @@
+[
+  {"Question": "How likely Stress?", "Response": "Agree", "Per": 50},
+  {"Question": "How likely Stress?", "Response": "T Agree", "Per": 10},
+  {"Question": "How likely Stress?", "Response": "T Disagree", "Per": 10},
+  {"Question": "How likely Stress?", "Response": "Disgree", "Per": 30},
+  {"Question": "How likely Management?", "Response": "Agree", "Per": 45},
+  {"Question": "How likely Management?", "Response": "T Agree", "Per": 30},
+  {"Question": "How likely Management?", "Response": "T Disagree", "Per": 15},
+  {"Question": "How likely Management?", "Response": "Disagree", "Per": 10},
+  {"Question": "How likely Communication?", "Response": "Agree", "Per": 25},
+  {"Question": "How likely Communication?", "Response": "T Agree", "Per": 30},
+  {"Question": "How likely Communication?", "Response": "T Disagree", "Per": 25},
+  {"Question": "How likely Communication?", "Response": "Disagree", "Per": 20}
+]
